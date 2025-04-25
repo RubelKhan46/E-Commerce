@@ -1,7 +1,7 @@
 import { createContext } from "react";
-import { products } from "../assets/assets";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 import { use } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +12,11 @@ const ShopContextProvider = ( props ) => {
 
     const currency = '$';
     const delivery_fee = 10;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [ cartItems, setCartItems ] = useState({});
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
     const addToCart = (itemId,size) => {
@@ -60,6 +62,7 @@ const ShopContextProvider = ( props ) => {
         return totalCount;
     }
 
+
     const updateQuantity = async (itemId,size,quantity) => {
 
         let cartData = structuredClone(cartItems);
@@ -86,6 +89,18 @@ const ShopContextProvider = ( props ) => {
         }
         return totalAmount;
     }
+    const getProductsData = async () => {
+        try {
+            const response = await axios.get(backendUrl + '/api/product/list');
+            console.log(response.data)
+        } catch (error) {
+            
+        }
+    }
+
+    useEffect(() => {
+        getProductsData()
+    },[])
 
     const value = {
         products,
@@ -100,7 +115,8 @@ const ShopContextProvider = ( props ) => {
         getCartCount,
         updateQuantity,
         getCartAmount,
-        navigate
+        navigate,
+        backendUrl
     }
     return (
         <ShopContext.Provider value={value}>
