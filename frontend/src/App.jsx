@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,8 +14,13 @@ import PlaceOrder from "./pages/PlaceOrder";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
+import ChatInterfaceModal from "./components/chatInterfaceModal";
+import { ShopContext } from "./context/ShopContext";
+import { FaComments } from "react-icons/fa";
 
 const App = () => {
+  const { openChatModal, setOpenChatModal } = useContext(ShopContext);
+
   return (
     <div>
       <ToastContainer />
@@ -33,6 +38,47 @@ const App = () => {
         <Route path="/orders" element={<Orders />} />
       </Routes>
       <Footer />
+      
+      {/* Chat Icon Button */}
+      <button 
+        className="chat-icon-button"
+        onClick={() => setOpenChatModal(!openChatModal)}
+        aria-label="Open chat"
+      >
+        <FaComments size={24} />
+      </button>
+
+      {/* Chat Interface Modal */}
+      <ChatInterfaceModal 
+        show={openChatModal} 
+        handleClose={() => setOpenChatModal(false)} 
+      />
+
+      {/* Add CSS for the chat icon button */}
+      <style jsx="true">{`
+        .chat-icon-button {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+          cursor: pointer;
+          z-index: 1000;
+          transition: all 0.3s ease;
+        }
+        .chat-icon-button:hover {
+          transform: scale(1.1);
+          background-color: #0056b3;
+        }
+      `}</style>
     </div>
   );
 };

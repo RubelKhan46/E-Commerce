@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
+import airouter from "./routes/aiRoutes.js";
 
 // App Config
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors());
 // api endpoints
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
+app.use("/api/ai", airouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");
