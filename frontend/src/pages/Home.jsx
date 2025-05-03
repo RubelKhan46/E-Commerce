@@ -1,9 +1,9 @@
-import React from 'react'
-import Slider from '../components/Slider'
-import LatestCollection from '../components/LatestCollection'
-import BestSeller from '../components/BestSeller'
-import OurPolicy from '../components/OurPolicy'
-import NewsletterBox from '../components/NewsletterBox'
+import React from "react";
+import Slider from "../components/Slider";
+import LatestCollection from "../components/LatestCollection";
+import BestSeller from "../components/BestSeller";
+import OurPolicy from "../components/OurPolicy";
+import NewsletterBox from "../components/NewsletterBox";
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
       <OurPolicy />
       <NewsletterBox />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

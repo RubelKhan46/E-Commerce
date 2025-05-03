@@ -15,16 +15,16 @@ const loginUser = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      res.json({ success: false, message: "User doesn't exists" });
+      return res.json({ success: false, message: "User doesn't exists" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (isMatch) {
       const token = createToken(user._id);
-      res.json({ success: true, token });
+      return res.json({ success: true, token });
     } else {
-      res.json({ success: false, message: "Invalid credentials" });
+      return res.json({ success: false, message: "Invalid credentials" });
     }
   } catch (error) {
     console.log(error);
@@ -41,18 +41,21 @@ const registerUser = async (req, res) => {
     // Check if the user already exists or not
     const userExists = await userModel.findOne({ email });
     if (userExists) {
-      res.json({ success: false, message: "User already exists" });
+      return res.json({ success: false, message: "User already exists" });
     }
 
     // validating email format and strong password
     if (!validator.isEmail(email)) {
-      res.json({
+      return res.json({
         success: false,
         message: "Please enter a valid email address",
       });
     }
     if (password.length < 8) {
-      res.json({ success: false, message: "Please enter a strong password" });
+      return res.json({
+        success: false,
+        message: "Please enter a strong password",
+      });
     }
 
     // hashing the password
@@ -86,9 +89,9 @@ const adminLogin = async (req, res) => {
       password === process.env.ADMIN_PASSWORD
     ) {
       const token = jwt.sign(email + password, process.env.JWT_SECRET);
-      res.json({ success: true, token });
+      return res.json({ success: true, token });
     } else {
-      res.json({ success: false, message: "Invalid credentials" });
+      return res.json({ success: false, message: "Invalid credentials" });
     }
   } catch (error) {
     console.log(error);
