@@ -8,32 +8,22 @@ import { useNavigate } from "react-router-dom";
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
-<<<<<<< Updated upstream
+
   const [openChatModal, setOpenChatModal] = useState(false);
   const currency = "$";
   const delivery_fee = 10;
   const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
-=======
-  const currency = "$";
-  const delivery_fee = 10;
-  const backendUrl =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
->>>>>>> Stashed changes
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
-<<<<<<< Updated upstream
   const navigate = useNavigate();
+  const [token, setToken] = useState("");
+  
   
 
-  const addToCart = (itemId, size) => {
-=======
-  const [token, setToken] = useState("");
-  const navigate = useNavigate();
-
   const addToCart = async (itemId, size) => {
->>>>>>> Stashed changes
+
     if (!size) {
       toast.error("Select a Product Size");
       return;
@@ -54,10 +44,6 @@ const ShopContextProvider = (props) => {
       cartData[itemId][size] = 1;
     }
     setCartItems(cartData);
-<<<<<<< Updated upstream
-  };
-
-=======
 
     if (token) {
       try {
@@ -73,7 +59,6 @@ const ShopContextProvider = (props) => {
     }
   };
 
->>>>>>> Stashed changes
   const getCartCount = () => {
     let totalCount = 0;
     for (const items in cartItems) {
@@ -94,68 +79,6 @@ const ShopContextProvider = (props) => {
     cartData[itemId][size] = quantity;
 
     setCartItems(cartData);
-<<<<<<< Updated upstream
-  };
-
-  const getCartAmount = () => {
-    let totalAmount = 0;
-    for (const items in cartItems) {
-      let itemInfo = products.find((product) => product._id === items);
-      for (const item in cartItems[items]) {
-        try {
-          if (cartItems[items][item] > 0) {
-            totalAmount += itemInfo.price * cartItems[items][item];
-          }
-        } catch (error) {}
-      }
-    }
-    return totalAmount;
-  };
-
-  const getProductsData = async () => {
-    try {
-      const response = await axios.get(backendUrl + "/api/product/list");
-      if (response.data.success) {
-        setProducts(response.data.products);
-      } else {
-        toast.error(response.data.message || "Failed to fetch products");
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      toast.error(error.message || "Network error while fetching products");
-    }
-  };
-
-  useEffect(() => {
-    console.log("update data");
-    getProductsData();
-  }, []);
-
-  const value = {
-    openChatModal,
-    setOpenChatModal,
-    products,
-    currency,
-    delivery_fee,
-    search,
-    setSearch,
-    showSearch,
-    setShowSearch,
-    cartItems,
-    addToCart,
-    getCartCount,
-    updateQuantity,
-    getCartAmount,
-    navigate,
-    backendUrl,
-  };
-  return (
-    <ShopContext.Provider value={value}>
-      {props.children}
-    </ShopContext.Provider>
-  );
-};
-=======
 
     if (token) {
       try {
@@ -169,8 +92,8 @@ const ShopContextProvider = (props) => {
         toast.error(error.message);
       }
     }
+
   };
->>>>>>> Stashed changes
 
   const getCartAmount = () => {
     let totalAmount = 0;
@@ -186,6 +109,15 @@ const ShopContextProvider = (props) => {
     }
     return totalAmount;
   };
+
+
+  useEffect(() => {
+    console.log("update data");
+    getProductsData();
+  }, []);
+
+    
+
   const getProductsData = async () => {
     try {
       const response = await axios.get(backendUrl + "/api/product/list");
@@ -228,6 +160,8 @@ const ShopContextProvider = (props) => {
   }, []);
 
   const value = {
+    openChatModal,
+    setOpenChatModal,
     products,
     currency,
     delivery_fee,

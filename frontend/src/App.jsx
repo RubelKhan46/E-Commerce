@@ -14,8 +14,8 @@ import PlaceOrder from "./pages/PlaceOrder";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
-import ChatInterfaceModal from "./components/chatInterfaceModal";
 import { ShopContext } from "./context/ShopContext";
+import ChatInterfaceModal from "./components/ChatInterfaceModal";
 import { FaComments } from "react-icons/fa";
 import Verify from "./pages/Verify";
 
