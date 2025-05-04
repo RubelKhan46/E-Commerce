@@ -61,7 +61,7 @@ const Slider = () => {
             <h3 className="subtitleslider">{slide.subtitle}</h3>
             <div className="content">
               {" "}
-              <Link to="/Shop">
+              <Link to="/collection">
                 {" "}
                 <ShopNowBtn />
               </Link>{" "}

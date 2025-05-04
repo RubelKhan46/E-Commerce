@@ -110,12 +110,6 @@ const ShopContextProvider = (props) => {
     return totalAmount;
   };
 
-
-  useEffect(() => {
-    console.log("update data");
-    getProductsData();
-  }, []);
-
     
 
   const getProductsData = async () => {
