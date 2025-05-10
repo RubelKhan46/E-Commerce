@@ -15,7 +15,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import { ShopContext } from "./context/ShopContext";
-import ChatInterfaceModal from "./components/ChatInterfaceModal";
+import ChatInterfaceModal from "./components/chatInterfaceModal";
 import { FaComments } from "react-icons/fa";
 import Verify from "./pages/Verify";
 
